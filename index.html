@@ -32,14 +32,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 0px;
         }
 
         .container {
             background-color: var(--card-bg);
-            border-radius: 24px;
+            border-radius: 10px;
             box-shadow: var(--shadow);
-            width: 90%;
+            width: 400%;
             max-width: 900px;
             padding: 40px;
             text-align: center;
@@ -397,24 +397,6 @@
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
-
-        .performance-info {
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(181, 222, 255, 0.2);
-            border-radius: 12px;
-            font-size: 0.9rem;
-            color: var(--text);
-            text-align: left;
-        }
-
-        .performance-info h3 {
-            color: var(--primary);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
     </style>
 </head>
 <body>
@@ -462,14 +444,6 @@
                     <label for="resultText"><i class="fas fa-result"></i> Result:</label>
                     <div class="result-box" id="resultText"></div>
                 </div>
-
-                <div class="performance-info">
-                    <h3><i class="fas fa-info-circle"></i> Performance Features</h3>
-                    <p>• <strong>Bidirectional Encoding:</strong> Left-to-right and right-to-left support</p>
-                    <p>• <strong>Strong Cipher:</strong> 3+ character codes with mixed patterns</p>
-                    <p>• <strong>Emoji Support:</strong> Full encoding for popular emojis</p>
-                    <p>• <strong>Fast Processing:</strong> Optimized algorithms for quick conversion</p>
-                </div>
             </div>
         </div>
         
@@ -496,42 +470,38 @@
     </div>
 
     <script>
-        // Enhanced professional, strong, unique custom cipher mapping
-        const encodeMap = {
-            // Capital letters (3+ chars, strong, unique)
-            "A":"hpt", "B":"lom", "C":"miv", "D":"ked", "E":"sif", "F":"dax",
-            "G":"koy", "H":"fsa", "I":"ril", "J":"zej", "K":"tar", "L":"lun",
-            "M":"kmp", "N":"nex", "O":"sef", "P":"piz", "Q":"qaz", "R":"fek",
-            "S":"keb", "T":"tsk", "U":"tuv", "V":"dev", "W":"waz", "X":"xip",
-            "Y":"yaz", "Z":"zok",
+// Fully professional, strong, unique custom cipher mapping
+const encodeMap = {
+    // Capital letters (3+ chars, strong, unique)
+    "A":"hpt", "B":"lom", "C":"miv", "D":"ked", "E":"sif", "F":"dax",
+    "G":"koy", "H":"fsa", "I":"ril", "J":"zej", "K":"tar", "L":"lun",
+    "M":"kmp", "N":"nex", "O":"sef", "P":"piz", "Q":"qaz", "R":"fek",
+    "S":"keb", "T":"tsk", "U":"tuv", "V":"dev", "W":"waz", "X":"xip",
+    "Y":"yaz", "Z":"zok",
 
-            // Small letters (3+ chars, first letter preserved + '-' style)
-            "a":"h-ks", "b":"b-ln", "c":"c-qd", "d":"d-rx", "e":"e-io", "f":"f-zu",
-            "g":"g-pv", "h":"h-ek", "i":"i-ry", "j":"j-ux", "k":"k-lq", "l":"l-nt",
-            "m":"m-ow", "n":"n-av", "o":"o-pe", "p":"p-rk", "q":"q-sz", "r":"r-kx",
-            "s":"s-uh", "t":"t-vm", "u":"u-wp", "v":"v-ef", "w":"w-yo", "x":"x-zt",
-            "y":"y-bq", "z":"z-xm",
+    // Small letters (3+ chars, first letter preserved + '-' style)
+    "a":"h-ks", "b":"b-ln", "c":"c-qd", "d":"d-rx", "e":"e-io", "f":"f-zu",
+    "g":"g-pv", "h":"h-ek", "i":"i-ry", "j":"j-ux", "k":"k-lq", "l":"l-nt",
+    "m":"m-ow", "n":"n-av", "o":"o-pe", "p":"p-rk", "q":"q-sz", "r":"r-kx",
+    "s":"s-uh", "t":"t-vm", "u":"u-wp", "v":"v-ef", "w":"w-yo", "x":"x-zt",
+    "y":"y-bq", "z":"z-xm",
 
-            // Numbers (3+ chars, strong, unique)
-            "0":"n-a0", "1":"n-b1", "2":"n-c2", "3":"n-d3", "4":"n-e4",
-            "5":"n-f5", "6":"n-g6", "7":"n-h7", "8":"n-i8", "9":"n-j9",
+    // Numbers (3+ chars, strong, unique)
+    "0":"n-a0", "1":"n-b1", "2":"n-c2", "3":"n-d3", "4":"n-e4",
+    "5":"n-f5", "6":"n-g6", "7":"n-h7", "8":"n-i8", "9":"n-j9",
 
-            // Symbols (3+ chars, strong, unique)
-            "!":"x-!p", "@":"y-@q", "#":"z-#r", "$":"a-$s", "%":"b-%t", "^":"c-^u", "&":"d-&v",
-            "*":"e-*w", "(":"f-(x", ")":"g-)y", "-":"h--z", "_":"i-_a", "=":"j-=b", "+":"k-+c",
-            "{":"l-{d", "}":"m-}e", "[":"n-[f", "]":"o-]g", "|":"p-|h", "\\":"q-\\i", ":":"r-:j",
-            ";":"s-;k", '"':'t-"l', "'":"u-'m", "<":"v-<n", ">":"w->o", ",":"x-,p", ".":"y-.q",
-            "?":"z-?r", "/":"a-/s", "~":"b-~t", "`":"c-`u",
+    // Symbols (3+ chars, strong, unique)
+    "!":"x-!p", "@":"y-@q", "#":"z-#r", "$":"a-$s", "%":"b-%t", "^":"c-^u", "&":"d-&v",
+    "*":"e-*w", "(":"f-(x", ")":"g-)y", "-":"h--z", "_":"i-_a", "=":"j-=b", "+":"k-+c",
+    "{":"l-{d", "}":"m-}e", "[":"n-[f", "]":"o-]g", "|":"p-|h", "\\":"q-\\i", ":":"r-:j",
+    ";":"s-;k", '"':'t-"l', "'":"u-\'m", "<":"v-<n", ">":"w->o", ",":"x-,p", ".":"y-.q",
+    "?":"z-?r", "/":"a-/s", "~":"b-~t", "`":"c-`u",
 
-            // Emojis (3+ chars, strong, unique)
-            "😂":"em-1a", "🤣":"em-2b", "😍":"em-3c", "🥹":"em-4d", "😎":"em-5e", "🤯":"em-6f",
-            "🫠":"em-7g", "🤤":"em-8h", "💫":"em-9i", "😇":"em-10j", "❤️":"em-11k", "🖤":"em-12l",
-            "💀":"em-13m", "💥":"em-14n", "🔥":"em-15o", "🎉":"em-16p", "🎶":"em-17q", "🫶":"em-18r",
-
-            // Space and special characters
-            " ":"spc", "\n":"nl", "\t":"tab"
-        };
-
+    // Emojis (3+ chars, strong, unique)
+    "😂":"em-1a", "🤣":"em-2b", "😍":"em-3c", "🥹":"em-4d", "😎":"em-5e", "🤯":"em-6f",
+    "🫠":"em-7g", "🤤":"em-8h", "💫":"em-9i", "😇":"em-10j", "❤️":"em-11k", "🖤":"em-12l",
+    "💀":"em-13m", "💥":"em-14n", "🔥":"em-15o", "🎉":"em-16p", "🎶":"em-17q", "🫶":"em-18r"
+};
         // Create reverse mapping for decoding
         const decodeMap = {};
         for (const [key, value] of Object.entries(encodeMap)) {
@@ -543,31 +513,27 @@
             const inputText = document.getElementById('inputText').value;
             let result = '';
             
-            // Process each character with proper emoji handling
-            let i = 0;
-            while (i < inputText.length) {
-                let encoded = false;
+            // Process each character
+            for (let i = 0; i < inputText.length; i++) {
+                const char = inputText[i];
                 
-                // Check for emojis and special characters first (2-character codes)
+                // Handle emojis (which are 2 characters in JavaScript)
                 if (i < inputText.length - 1) {
-                    const twoChar = inputText.substring(i, i + 2);
-                    if (encodeMap[twoChar]) {
-                        result += encodeMap[twoChar] + '-';
-                        i += 2;
-                        encoded = true;
+                    const possibleEmoji = inputText.substring(i, i+2);
+                    if (encodeMap[possibleEmoji]) {
+                        result += encodeMap[possibleEmoji] + '-';
+                        i++; // Skip next character as we've processed the emoji
                         continue;
                     }
                 }
                 
                 // Handle regular characters
-                const char = inputText[i];
                 if (encodeMap[char]) {
                     result += encodeMap[char] + '-';
                 } else {
                     // If character not in mapping, keep it as is
                     result += char + '-';
                 }
-                i++;
             }
             
             // Remove the trailing dash
@@ -584,31 +550,13 @@
             const codeParts = inputText.split('-');
             let result = '';
             
-            // Handle bidirectional decoding (left-to-right and right-to-left)
-            let i = 0;
-            while (i < codeParts.length) {
-                const part = codeParts[i];
-                
-                // Check for direct mapping
+            for (const part of codeParts) {
                 if (decodeMap[part]) {
                     result += decodeMap[part];
-                    i++;
-                    continue;
+                } else {
+                    // If code not in mapping, keep it as is
+                    result += part;
                 }
-                
-                // Check for combined codes (for bidirectional support)
-                if (i < codeParts.length - 1) {
-                    const combined = part + '-' + codeParts[i + 1];
-                    if (decodeMap[combined]) {
-                        result += decodeMap[combined];
-                        i += 2;
-                        continue;
-                    }
-                }
-                
-                // If no mapping found, use the original part
-                result += part;
-                i++;
             }
             
             document.getElementById('resultText').textContent = result;
@@ -714,7 +662,7 @@
         }
 
         // Initialize with an example
-        document.getElementById('inputText').value = 'Atharv Sharma 😎';
+        document.getElementById('inputText').value = 'Hello! 😊';
         encodeMessage();
     </script>
 </body>
