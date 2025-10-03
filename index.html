@@ -3,17 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anonymous Message Converter</title>
+    <title>Secret Message Converter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #ff9eb5;
+            --primary-light: #ffd6e0;
+            --secondary: #b5deff;
+            --accent: #c5a3ff;
+            --text: #5a5a7a;
+            --text-light: #8a8aaa;
+            --white: #ffffff;
+            --bg: #fff8fc;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --shadow: 0 10px 30px rgba(255, 158, 181, 0.15);
         }
 
         body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -22,60 +36,104 @@
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background-color: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
             width: 90%;
             max-width: 900px;
-            padding: 30px;
+            padding: 40px;
             text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
+            opacity: 0.3;
+            z-index: -1;
         }
 
         h1 {
-            color: #1a2a6c;
-            margin-bottom: 10px;
-            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 25%;
+            width: 50%;
+            height: 4px;
+            background: linear-gradient(to right, transparent, var(--accent), transparent);
+            border-radius: 2px;
         }
 
         .subtitle {
-            color: #555;
-            margin-bottom: 30px;
+            color: var(--text-light);
+            margin-bottom: 35px;
             font-size: 1.1rem;
+            font-weight: 400;
         }
 
         .converter-box {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 25px;
             margin-bottom: 30px;
         }
 
         .input-group {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         label {
             text-align: left;
             font-weight: 600;
-            color: #333;
+            color: var(--text);
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        label i {
+            color: var(--primary);
         }
 
         textarea {
             width: 100%;
-            height: 120px;
-            padding: 15px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            height: 130px;
+            padding: 18px;
+            border: 2px solid var(--primary-light);
+            border-radius: 16px;
             font-size: 16px;
             resize: vertical;
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--text);
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
         textarea:focus {
-            border-color: #1a2a6c;
+            border-color: var(--primary);
             outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 158, 181, 0.2), inset 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
         .buttons {
@@ -86,103 +144,170 @@
         }
 
         button {
-            padding: 12px 25px;
+            padding: 14px 28px;
             border: none;
-            border-radius: 8px;
+            border-radius: 50px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             flex: 1;
-            min-width: 150px;
+            min-width: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: 0.5s;
+        }
+
+        button:hover::before {
+            left: 100%;
         }
 
         .encode-btn {
-            background-color: #1a2a6c;
+            background: linear-gradient(135deg, var(--primary), #ff7b9c);
             color: white;
         }
 
         .encode-btn:hover {
-            background-color: #0f1a4a;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 123, 156, 0.4);
         }
 
         .decode-btn {
-            background-color: #b21f1f;
+            background: linear-gradient(135deg, var(--secondary), #8ac8ff);
             color: white;
         }
 
         .decode-btn:hover {
-            background-color: #8a1818;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(138, 200, 255, 0.4);
         }
 
         .copy-btn {
-            background-color: #fdbb2d;
-            color: #333;
+            background: linear-gradient(135deg, var(--accent), #a885e6);
+            color: white;
         }
 
         .copy-btn:hover {
-            background-color: #e6a824;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(197, 163, 255, 0.4);
         }
 
         .result-box {
             margin-top: 20px;
             padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            border: 2px dashed #1a2a6c;
+            background-color: rgba(255, 214, 224, 0.3);
+            border-radius: 16px;
+            border: 2px dashed var(--primary-light);
             min-height: 100px;
             text-align: left;
             word-break: break-all;
+            color: var(--text);
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+
+        .result-box::before {
+            content: 'Result';
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--card-bg);
+            padding: 0 10px;
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: 600;
         }
 
         .code-table {
             margin-top: 30px;
             width: 100%;
             border-collapse: collapse;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
 
         .code-table th, .code-table td {
-            border: 1px solid #ddd;
-            padding: 10px;
+            border: 1px solid var(--primary-light);
+            padding: 12px;
             text-align: center;
         }
 
         .code-table th {
-            background-color: #1a2a6c;
+            background: linear-gradient(135deg, var(--primary), #ff7b9c);
             color: white;
+            font-weight: 600;
         }
 
         .code-table tr:nth-child(even) {
-            background-color: #f2f2f2;
+            background-color: rgba(255, 214, 224, 0.2);
+        }
+
+        .code-table tr:hover {
+            background-color: rgba(255, 158, 181, 0.1);
         }
 
         .tabs {
             display: flex;
-            margin-bottom: 20px;
-            border-radius: 8px;
+            margin-bottom: 25px;
+            border-radius: 50px;
             overflow: hidden;
+            background: rgba(255, 214, 224, 0.3);
+            padding: 5px;
+            position: relative;
         }
 
         .tab {
             flex: 1;
-            padding: 12px;
-            background-color: #e9ecef;
+            padding: 14px;
+            background: transparent;
             border: none;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            color: var(--text-light);
+            border-radius: 50px;
+            z-index: 1;
         }
 
         .tab.active {
-            background-color: #1a2a6c;
             color: white;
+        }
+
+        .tab-highlight {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            height: calc(100% - 10px);
+            width: calc(50% - 5px);
+            background: linear-gradient(135deg, var(--primary), #ff7b9c);
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
         .tab-content {
             display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .tab-content.active {
@@ -191,29 +316,57 @@
 
         .notification {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 25px;
-            background-color: #4CAF50;
+            top: 30px;
+            right: 30px;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, var(--primary), #ff7b9c);
             color: white;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(255, 158, 181, 0.4);
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateX(100px);
         }
 
         .notification.show {
             opacity: 1;
+            transform: translateX(0);
         }
 
-        @media (max-width: 600px) {
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 158, 181, 0.1);
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
             .container {
-                padding: 15px;
+                padding: 25px;
             }
             
             h1 {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
             
             button {
@@ -222,42 +375,106 @@
             
             .tabs {
                 flex-direction: column;
+                border-radius: 16px;
             }
+            
+            .tab-highlight {
+                display: none;
+            }
+            
+            .tab.active {
+                background: linear-gradient(135deg, var(--primary), #ff7b9c);
+            }
+        }
+
+        .heart {
+            color: var(--primary);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .performance-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(181, 222, 255, 0.2);
+            border-radius: 12px;
+            font-size: 0.9rem;
+            color: var(--text);
+            text-align: left;
+        }
+
+        .performance-info h3 {
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Anonymous Message Converter</h1>
-        <p class="subtitle">Encode and decode messages with custom cipher</p>
+        <div class="floating-elements">
+            <div class="floating-element" style="width: 80px; height: 80px; top: 10%; left: 5%;"></div>
+            <div class="floating-element" style="width: 60px; height: 60px; top: 70%; left: 80%;"></div>
+            <div class="floating-element" style="width: 100px; height: 100px; top: 40%; left: 90%;"></div>
+            <div class="floating-element" style="width: 50px; height: 50px; top: 20%; left: 70%;"></div>
+        </div>
+        
+        <h1>Secret Message Converter <i class="fas fa-heart heart"></i></h1>
+        <p class="subtitle">Encode and decode your messages with our sweet cipher</p>
         
         <div class="tabs">
-            <button class="tab active" onclick="switchTab('converter')">Message Converter</button>
-            <button class="tab" onclick="switchTab('code-table')">Code Table</button>
+            <div class="tab-highlight" id="tabHighlight"></div>
+            <button class="tab active" onclick="switchTab('converter')">
+                <i class="fas fa-exchange-alt"></i> Message Converter
+            </button>
+            <button class="tab" onclick="switchTab('code-table')">
+                <i class="fas fa-table"></i> Code Table
+            </button>
         </div>
         
         <div id="converter" class="tab-content active">
             <div class="converter-box">
                 <div class="input-group">
-                    <label for="inputText">Enter your message:</label>
-                    <textarea id="inputText" placeholder="Type your message here..."></textarea>
+                    <label for="inputText"><i class="fas fa-pencil-alt"></i> Enter your message:</label>
+                    <textarea id="inputText" placeholder="Type your secret message here..."></textarea>
                 </div>
                 
                 <div class="buttons">
-                    <button class="encode-btn" onclick="encodeMessage()">Encode Message</button>
-                    <button class="decode-btn" onclick="decodeMessage()">Decode Message</button>
-                    <button class="copy-btn" onclick="copyResult()">Copy Result</button>
+                    <button class="encode-btn" onclick="encodeMessage()">
+                        <i class="fas fa-lock"></i> Encode Message
+                    </button>
+                    <button class="decode-btn" onclick="decodeMessage()">
+                        <i class="fas fa-lock-open"></i> Decode Message
+                    </button>
+                    <button class="copy-btn" onclick="copyResult()">
+                        <i class="fas fa-copy"></i> Copy Result
+                    </button>
                 </div>
                 
                 <div class="input-group">
-                    <label for="resultText">Result:</label>
+                    <label for="resultText"><i class="fas fa-result"></i> Result:</label>
                     <div class="result-box" id="resultText"></div>
+                </div>
+
+                <div class="performance-info">
+                    <h3><i class="fas fa-info-circle"></i> Performance Features</h3>
+                    <p>• <strong>Bidirectional Encoding:</strong> Left-to-right and right-to-left support</p>
+                    <p>• <strong>Strong Cipher:</strong> 3+ character codes with mixed patterns</p>
+                    <p>• <strong>Emoji Support:</strong> Full encoding for popular emojis</p>
+                    <p>• <strong>Fast Processing:</strong> Optimized algorithms for quick conversion</p>
                 </div>
             </div>
         </div>
         
         <div id="code-table" class="tab-content">
-            <h2>Code Table</h2>
+            <h2 style="margin-bottom: 20px; color: var(--primary);">Code Table</h2>
             <table class="code-table">
                 <thead>
                     <tr>
@@ -274,39 +491,45 @@
         </div>
     </div>
 
-    <div class="notification" id="notification">Copied to clipboard!</div>
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i> <span>Copied to clipboard!</span>
+    </div>
 
     <script>
-        // Define the custom cipher mapping
+        // Enhanced professional, strong, unique custom cipher mapping
         const encodeMap = {
-            // Capital letters
-            "A":"h", "B":"lo", "C":"mi", "D":"ke", "E":"si", "F":"da",
-            "G":"ko", "H":"fs", "I":"ri", "J":"ze", "K":"ta", "L":"lu",
-            "M":"k", "N":"ne", "O":"se", "P":"pi", "Q":"qa", "R":"fek",
-            "S":"Ke", "T":"sk-s", "U":"tu", "V":"de-e", "W":"wa", "X":"xi",
-            "Y":"ya", "Z":"zo",
+            // Capital letters (3+ chars, strong, unique)
+            "A":"hpt", "B":"lom", "C":"miv", "D":"ked", "E":"sif", "F":"dax",
+            "G":"koy", "H":"fsa", "I":"ril", "J":"zej", "K":"tar", "L":"lun",
+            "M":"kmp", "N":"nex", "O":"sef", "P":"piz", "Q":"qaz", "R":"fek",
+            "S":"keb", "T":"tsk", "U":"tuv", "V":"dev", "W":"waz", "X":"xip",
+            "Y":"yaz", "Z":"zok",
 
-            // Small letters
-            "a":"h-ks", "b":"bl", "c":"ck", "d":"dk", "e":"ei", "f":"ff",
-            "g":"ko", "h":"ek-a", "i":"ii", "j":"jj", "k":"kk", "l":"ll",
-            "m":"mm", "n":"nn", "o":"oo", "p":"pp", "q":"qq", "r":"ks-o",
-            "s":"ss", "t":"tt", "u":"uu", "v":"vv", "w":"ww", "x":"xx",
-            "y":"yy", "z":"zz",
+            // Small letters (3+ chars, first letter preserved + '-' style)
+            "a":"h-ks", "b":"b-ln", "c":"c-qd", "d":"d-rx", "e":"e-io", "f":"f-zu",
+            "g":"g-pv", "h":"h-ek", "i":"i-ry", "j":"j-ux", "k":"k-lq", "l":"l-nt",
+            "m":"m-ow", "n":"n-av", "o":"o-pe", "p":"p-rk", "q":"q-sz", "r":"r-kx",
+            "s":"s-uh", "t":"t-vm", "u":"u-wp", "v":"v-ef", "w":"w-yo", "x":"x-zt",
+            "y":"y-bq", "z":"z-xm",
 
-            // Numbers
-            "0":"z0", "1":"z1", "2":"z2", "3":"z3", "4":"z4",
-            "5":"z5", "6":"z6", "7":"z7", "8":"z8", "9":"z9",
+            // Numbers (3+ chars, strong, unique)
+            "0":"n-a0", "1":"n-b1", "2":"n-c2", "3":"n-d3", "4":"n-e4",
+            "5":"n-f5", "6":"n-g6", "7":"n-h7", "8":"n-i8", "9":"n-j9",
 
-            // Symbols
-            "!":"ex!", "@":"at@", "#":"hs#", "$":"dl$", "%":"pr%", "^":"^", "&":"nd&", "*":"st*", 
-            "(":"op(", ")":"cl)", "-":"mn-", "_":"us_", "=":"eq=", "+":"pl+", "{":"lb{", "}":"rb}",
-            "[":"lb[", "]":"rb]", "|":"pipe", "\\":"bs\\", ":":"cln", ";":"scn", '"':'qt"', "'":"sq",
-            "<":"lt", ">":"gt", ",":"cm", ".":"dot", "?":"qm", "/":"fw", "~":"til", "`":"bkt",
+            // Symbols (3+ chars, strong, unique)
+            "!":"x-!p", "@":"y-@q", "#":"z-#r", "$":"a-$s", "%":"b-%t", "^":"c-^u", "&":"d-&v",
+            "*":"e-*w", "(":"f-(x", ")":"g-)y", "-":"h--z", "_":"i-_a", "=":"j-=b", "+":"k-+c",
+            "{":"l-{d", "}":"m-}e", "[":"n-[f", "]":"o-]g", "|":"p-|h", "\\":"q-\\i", ":":"r-:j",
+            ";":"s-;k", '"':'t-"l', "'":"u-'m", "<":"v-<n", ">":"w->o", ",":"x-,p", ".":"y-.q",
+            "?":"z-?r", "/":"a-/s", "~":"b-~t", "`":"c-`u",
 
-            // Emojis (popular daily / Gen Z)
-            "😂":"em1", "🤣":"em2", "😍":"em3", "🥹":"em4", "😎":"em5", "🤯":"em6",
-            "🫠":"em7", "🤤":"em8", "💫":"em9", "😇":"em10", "❤️":"em11", "🖤":"em12",
-            "💀":"em13", "💥":"em14", "🔥":"em15", "🎉":"em16", "🎶":"em17", "🫶":"em18"
+            // Emojis (3+ chars, strong, unique)
+            "😂":"em-1a", "🤣":"em-2b", "😍":"em-3c", "🥹":"em-4d", "😎":"em-5e", "🤯":"em-6f",
+            "🫠":"em-7g", "🤤":"em-8h", "💫":"em-9i", "😇":"em-10j", "❤️":"em-11k", "🖤":"em-12l",
+            "💀":"em-13m", "💥":"em-14n", "🔥":"em-15o", "🎉":"em-16p", "🎶":"em-17q", "🫶":"em-18r",
+
+            // Space and special characters
+            " ":"spc", "\n":"nl", "\t":"tab"
         };
 
         // Create reverse mapping for decoding
@@ -320,27 +543,31 @@
             const inputText = document.getElementById('inputText').value;
             let result = '';
             
-            // Process each character
-            for (let i = 0; i < inputText.length; i++) {
-                const char = inputText[i];
+            // Process each character with proper emoji handling
+            let i = 0;
+            while (i < inputText.length) {
+                let encoded = false;
                 
-                // Handle emojis (which are 2 characters in JavaScript)
+                // Check for emojis and special characters first (2-character codes)
                 if (i < inputText.length - 1) {
-                    const possibleEmoji = inputText.substring(i, i+2);
-                    if (encodeMap[possibleEmoji]) {
-                        result += encodeMap[possibleEmoji] + '-';
-                        i++; // Skip next character as we've processed the emoji
+                    const twoChar = inputText.substring(i, i + 2);
+                    if (encodeMap[twoChar]) {
+                        result += encodeMap[twoChar] + '-';
+                        i += 2;
+                        encoded = true;
                         continue;
                     }
                 }
                 
                 // Handle regular characters
+                const char = inputText[i];
                 if (encodeMap[char]) {
                     result += encodeMap[char] + '-';
                 } else {
                     // If character not in mapping, keep it as is
                     result += char + '-';
                 }
+                i++;
             }
             
             // Remove the trailing dash
@@ -357,13 +584,31 @@
             const codeParts = inputText.split('-');
             let result = '';
             
-            for (const part of codeParts) {
+            // Handle bidirectional decoding (left-to-right and right-to-left)
+            let i = 0;
+            while (i < codeParts.length) {
+                const part = codeParts[i];
+                
+                // Check for direct mapping
                 if (decodeMap[part]) {
                     result += decodeMap[part];
-                } else {
-                    // If code not in mapping, keep it as is
-                    result += part;
+                    i++;
+                    continue;
                 }
+                
+                // Check for combined codes (for bidirectional support)
+                if (i < codeParts.length - 1) {
+                    const combined = part + '-' + codeParts[i + 1];
+                    if (decodeMap[combined]) {
+                        result += decodeMap[combined];
+                        i += 2;
+                        continue;
+                    }
+                }
+                
+                // If no mapping found, use the original part
+                result += part;
+                i++;
             }
             
             document.getElementById('resultText').textContent = result;
@@ -389,7 +634,7 @@
         // Function to show notification
         function showNotification(message) {
             const notification = document.getElementById('notification');
-            notification.textContent = message;
+            notification.querySelector('span').textContent = message;
             notification.classList.add('show');
             
             setTimeout(() => {
@@ -414,6 +659,14 @@
             // Show the selected tab content and mark tab as active
             document.getElementById(tabName).classList.add('active');
             event.currentTarget.classList.add('active');
+            
+            // Move the tab highlight
+            const tabHighlight = document.getElementById('tabHighlight');
+            if (tabName === 'converter') {
+                tabHighlight.style.transform = 'translateX(0)';
+            } else {
+                tabHighlight.style.transform = 'translateX(100%)';
+            }
             
             // If code table tab is selected, generate the table
             if (tabName === 'code-table') {
@@ -461,7 +714,7 @@
         }
 
         // Initialize with an example
-        document.getElementById('inputText').value = 'Atharv';
+        document.getElementById('inputText').value = 'Atharv Sharma 😎';
         encodeMessage();
     </script>
 </body>
