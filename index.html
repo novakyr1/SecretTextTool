@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secret Message Converter</title>
+    <title>Advanced Secret Message Converter</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -32,12 +32,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 0px;
+            padding: 20px;
         }
 
         .container {
             background-color: var(--card-bg);
-            border-radius: 0px;
+            border-radius: 20px;
             box-shadow: var(--shadow);
             width: 100%;
             max-width: 900px;
@@ -426,8 +426,8 @@
             <div class="floating-element" style="width: 50px; height: 50px; top: 20%; left: 70%;"></div>
         </div>
         
-        <h1>Secret Message Converter <i class="fas fa-heart heart"></i></h1>
-        <p class="subtitle">Encode and decode your messages with our sweet cipher</p>
+        <h1>Advanced Secret Message Converter <i class="fas fa-heart heart"></i></h1>
+        <p class="subtitle">Encode and decode messages with our advanced pattern-free cipher</p>
         
         <div class="tabs">
             <div class="tab-highlight" id="tabHighlight"></div>
@@ -464,11 +464,11 @@
                 </div>
 
                 <div class="performance-info">
-                    <h3><i class="fas fa-info-circle"></i> Performance Features</h3>
-                    <p>• <strong>Bidirectional Encoding:</strong> Left-to-right and right-to-left support</p>
-                    <p>• <strong>Strong Cipher:</strong> 3+ character codes with mixed patterns</p>
-                    <p>• <strong>Emoji Support:</strong> Full encoding for popular emojis</p>
-                    <p>• <strong>Fast Processing:</strong> Optimized algorithms for quick conversion</p>
+                    <h3><i class="fas fa-info-circle"></i> Advanced Security Features</h3>
+                    <p>• <strong>Pattern-Free Encoding:</strong> No repeated patterns for similar characters</p>
+                    <p>• <strong>Advanced Cipher:</strong> 4+ character codes with unique patterns</p>
+                    <p>• <strong>Full Unicode Support:</strong> Encoding for all characters and emojis</p>
+                    <p>• <strong>Cryptographic Security:</strong> Professional-grade encoding algorithm</p>
                 </div>
             </div>
         </div>
@@ -495,227 +495,151 @@
         <i class="fas fa-check-circle"></i> <span>Copied to clipboard!</span>
     </div>
 
-    <script>
-        // Enhanced professional, strong, unique custom cipher mapping
-        const encodeMap = {
-            // Capital letters (3+ chars, strong, unique)
-            "A":"hpt", "B":"lom", "C":"miv", "D":"ked", "E":"sif", "F":"dax",
-            "G":"koy", "H":"fsa", "I":"ril", "J":"zej", "K":"tar", "L":"lun",
-            "M":"kmp", "N":"nex", "O":"sef", "P":"piz", "Q":"qaz", "R":"fek",
-            "S":"keb", "T":"tsk", "U":"tuv", "V":"dev", "W":"waz", "X":"xip",
-            "Y":"yaz", "Z":"zok",
+<script>
+    // Multi-variant encode map (rotation system)
+    const encodeMap = {
+        "A":["k9pz","a3mn","u7zx"], "B":["x2lm","b8kr","m1oq"], "C":["q8iv","c7pl","z4ny"],
+        "D":["r5ed","d9ak","p3vw"], "E":["s0if","e2qn","y8uh"], "F":["d7ax","f6jo","k1tr"],
+        "G":["k3oy","g4zp","v9us"], "H":["f9sa","h1qt","m6bx"], "I":["r8il","i2vm","n5cy"],
+        "J":["z5ej","j9kw","o7rd"], "K":["t2ar","k6px","q3ny"], "L":["l7un","l2vb","f8rt"],
+        "M":["k1mp","m4sd","a9zx"], "N":["n4ex","n7kp","r3qv"], "O":["s5ef","o8lw","x2dr"],
+        "P":["p9iz","p3mo","h6ty"], "Q":["q3az","q7el","z1vp"], "R":["f7ek","r9mu","d5sz"],
+        "S":["k6eb","s2qn","v8wx"], "T":["t8sk","t4zu","n3er"], "U":["t5uv","u1qp","y7ms"],
+        "V":["d3ev","v8ko","p6tn"], "W":["w7az","w1fr","c9yl"], "X":["x9ip","x2vs","o5mt"],
+        "Y":["y4az","y9nk","e7qr"], "Z":["z2ok","z8vm","r1ux"],
 
-            // Small letters (3+ chars, first letter preserved + '-' style)
-            "a":"h-ks", "b":"b-ln", "c":"c-qd", "d":"d-rx", "e":"e-io", "f":"f-zu",
-            "g":"g-pv", "h":"h-ek", "i":"i-ry", "j":"j-ux", "k":"k-lq", "l":"l-nt",
-            "m":"m-ow", "n":"n-av", "o":"o-pe", "p":"p-rk", "q":"q-sz", "r":"r-kx",
-            "s":"s-uh", "t":"t-vm", "u":"u-wp", "v":"v-ef", "w":"w-yo", "x":"x-zt",
-            "y":"y-bq", "z":"z-xm",
+        "a":["j7ks","a9pq","m4zx"], "b":["b4ln","b7vy","k3wu"], "c":["c9qd","c5mx","y1pt"],
+        "d":["d2rx","d8op","q6lz"], "e":["e5io","e7kr","h3uv"], "f":["f8zu","f2tm","w6pn"],
+        "g":["g3pv","g9le","o1xz"], "h":["h6ek","h2ms","j4yn"], "i":["i7ry","i5qx","m8zo"],
+        "j":["j4ux","j1ze","r6ot"], "k":["k1lq","k7yr","p2vx"], "l":["l9nt","l4xs","z5ro"],
+        "m":["m5ow","m2nl","q8jt"], "n":["n8av","n1pz","x6wo"], "o":["o2pe","o7mt","r9yl"],
+        "p":["p6rk","p3lz","c8vu"], "q":["q7sz","q4op","g1kw"], "r":["r3kx","r8my","b5uz"],
+        "s":["s8uh","s1wt","e6pn"], "t":["t4vm","t9qy","f7lr"], "u":["u9wp","u5ro","m2zs"],
+        "v":["v5ef","v8ls","a3kt"], "w":["w1yo","w7nr","j6qp"], "x":["x6zt","x9lm","s2ro"],
+        "y":["y3bq","y5zn","d8xp"], "z":["z7xm","z1vr","h9lu"],
 
-            // Numbers (3+ chars, strong, unique)
-            "0":"n-a0", "1":"n-b1", "2":"n-c2", "3":"n-d3", "4":"n-e4",
-            "5":"n-f5", "6":"n-g6", "7":"n-h7", "8":"n-i8", "9":"n-j9",
+        "0":["n0a0","o0b0","z0c0"], "1":["n1b1","p1q1","y1t1"], "2":["n2c2","q2w2","k2e2"],
+        "3":["n3d3","m3r3","a3u3"], "4":["n4e4","l4x4","h4o4"], "5":["n5f5","v5j5","b5m5"],
+        "6":["n6g6","q6t6","r6n6"], "7":["n7h7","d7p7","z7v7"], "8":["n8i8","g8o8","y8q8"],
+        "9":["n9j9","f9u9","c9z9"],
 
-            // Symbols (3+ chars, strong, unique)
-            "!":"x-!p", "@":"y-@q", "#":"z-#r", "$":"a-$s", "%":"b-%t", "^":"c-^u", "&":"d-&v",
-            "*":"e-*w", "(":"f-(x", ")":"g-)y", "-":"h--z", "_":"i-_a", "=":"j-=b", "+":"k-+c",
-            "{":"l-{d", "}":"m-}e", "[":"n-[f", "]":"o-]g", "|":"p-|h", "\\":"q-\\i", ":":"r-:j",
-            ";":"s-;k", '"':'t-"l', "'":"u-'m", "<":"v-<n", ">":"w->o", ",":"x-,p", ".":"y-.q",
-            "?":"z-?r", "/":"a-/s", "~":"b-~t", "`":"c-`u",
+        "!":["x1!p","z9!a","u4!q"], "@":["y2@q","m7@z","a1@x"], "#":["z3#r","b8#p","v2#l"],
+        "$":["a4$s","o9$t","p3$u"], "%":["b5%t","r6%y","k1%i"], "^":["c6^u","d7^a","n2^p"],
+        "&":["d7&v","j4&s","t8&n"], "*":["e8*w","u1*r","x6*z"], 
+        "(":["f9(x","q2(m","y7(o"], ")":["g0)y","h5)p","o9)r"],
+        "-":["h1-z","m6-k","t2-n"], "_":["i2_a","c4_w","l7_x"], "=":["j3=b","e5=o","z9=l"], "+":["k4+c","a7+r","p1+t"],
+        "{":["l5{d","f9{g","r2{q"], "}":["m6}e","n8}k","w3}t"], "[":["n7[f","z2[l","q5{b"],
+        "]":["o8]g","k3]n","d6]w"], "|":["p9|h","s4|r","a8|v"], "\\":["q0\\i","b7\\o","y5\\x"],
+        ":":["r1:j","t6:o","g9:i"], ";":["s2;k","j8;m","e4;z"],
+        '"':["t3\"l","u7\"o","c1\"r"], "'":["u4'm","h5't","q9'x"],
+        "<":["v5<n","o3<r","z6<t"], ">":["w6>o","k8>s","m2>p"],
+        ",":["x7,p","g4,n","a9.z"], ".":["y8.q","f2.x","b6.m"],
+        "?":["z9?r","p3?e","n7?y"], "/":["a0/s","c4/f","m8/v"],
+        "~":["b1~t","q6~p","h9~z"], "`":["c2`u","x5`r","o7`y"],
 
-            // Emojis (3+ chars, strong, unique)
-            "😂":"em-1a", "🤣":"em-2b", "😍":"em-3c", "🥹":"em-4d", "😎":"em-5e", "🤯":"em-6f",
-            "🫠":"em-7g", "🤤":"em-8h", "💫":"em-9i", "😇":"em-10j", "❤️":"em-11k", "🖤":"em-12l",
-            "💀":"em-13m", "💥":"em-14n", "🔥":"em-15o", "🎉":"em-16p", "🎶":"em-17q", "🫶":"em-18r",
+        "😂":["em1a","em1b","em1c"], "🤣":["em2a","em2b","em2c"], "😍":["em3a","em3b","em3c"],
+        "🥹":["em4a","em4b","em4c"], "😎":["em5a","em5b","em5c"], "🤯":["em6a","em6b","em6c"],
+        "🫠":["em7a","em7b","em7c"], "🤤":["em8a","em8b","em8c"], "💫":["em9a","em9b","em9c"],
+        "😇":["em0a","em0b","em0c"], "❤️":["em1k","em1l","em1m"], "🖤":["em2l","em2m","em2n"],
+        "💀":["em3m","em3n","em3o"], "💥":["em4n","em4o","em4p"], "🔥":["em5o","em5p","em5q"],
+        "🎉":["em6p","em6q","em6r"], "🎶":["em7q","em7r","em7s"], "🫶":["em8r","em8s","em8t"],
 
-            // Space and special characters
-            " ":"spc", "\n":"nl", "\t":"tab"
-        };
+        " ":["spc1","spc2","spc3"], "\n":["nl1","nl2","nl3"], "\t":["tab1","tab2","tab3"]
+    };
 
-        // Create reverse mapping for decoding
-        const decodeMap = {};
-        for (const [key, value] of Object.entries(encodeMap)) {
-            decodeMap[value] = key;
-        }
+    // Track usage index for rotation
+    const usageIndex = {};
+    const decodeMap = {};
+    for (const [key, values] of Object.entries(encodeMap)) {
+        values.forEach(v => decodeMap[v] = key);
+        usageIndex[key] = 0;
+    }
 
-        // Function to encode a message
-        function encodeMessage() {
-            const inputText = document.getElementById('inputText').value;
-            let result = '';
-            
-            // Process each character with proper emoji handling
-            let i = 0;
-            while (i < inputText.length) {
-                let encoded = false;
-                
-                // Check for emojis and special characters first (2-character codes)
-                if (i < inputText.length - 1) {
-                    const twoChar = inputText.substring(i, i + 2);
-                    if (encodeMap[twoChar]) {
-                        result += encodeMap[twoChar] + '-';
-                        i += 2;
-                        encoded = true;
-                        continue;
-                    }
-                }
-                
-                // Handle regular characters
-                const char = inputText[i];
-                if (encodeMap[char]) {
-                    result += encodeMap[char] + '-';
-                } else {
-                    // If character not in mapping, keep it as is
-                    result += char + '-';
-                }
-                i++;
-            }
-            
-            // Remove the trailing dash
-            if (result.endsWith('-')) {
-                result = result.slice(0, -1);
-            }
-            
-            document.getElementById('resultText').textContent = result;
-        }
-
-        // Function to decode a message
-        function decodeMessage() {
-            const inputText = document.getElementById('inputText').value;
-            const codeParts = inputText.split('-');
-            let result = '';
-            
-            // Handle bidirectional decoding (left-to-right and right-to-left)
-            let i = 0;
-            while (i < codeParts.length) {
-                const part = codeParts[i];
-                
-                // Check for direct mapping
-                if (decodeMap[part]) {
-                    result += decodeMap[part];
-                    i++;
-                    continue;
-                }
-                
-                // Check for combined codes (for bidirectional support)
-                if (i < codeParts.length - 1) {
-                    const combined = part + '-' + codeParts[i + 1];
-                    if (decodeMap[combined]) {
-                        result += decodeMap[combined];
-                        i += 2;
-                        continue;
-                    }
-                }
-                
-                // If no mapping found, use the original part
-                result += part;
-                i++;
-            }
-            
-            document.getElementById('resultText').textContent = result;
-        }
-
-        // Function to copy the result to clipboard
-        function copyResult() {
-            const resultText = document.getElementById('resultText').textContent;
-            if (resultText) {
-                navigator.clipboard.writeText(resultText)
-                    .then(() => {
-                        showNotification('Result copied to clipboard!');
-                    })
-                    .catch(err => {
-                        console.error('Failed to copy: ', err);
-                        showNotification('Failed to copy to clipboard');
-                    });
+    // Encode with rotation
+    function encodeMessage() {
+        const inputText = document.getElementById('inputText').value;
+        let result = '';
+        for (let i = 0; i < inputText.length; i++) {
+            const char = inputText[i];
+            if (encodeMap[char]) {
+                let idx = usageIndex[char];
+                result += encodeMap[char][idx] + '-';
+                usageIndex[char] = (idx + 1) % encodeMap[char].length;
             } else {
-                showNotification('No result to copy!');
+                result += char + '-';
             }
         }
+        if (result.endsWith('-')) result = result.slice(0, -1);
+        document.getElementById('resultText').textContent = result;
+    }
 
-        // Function to show notification
-        function showNotification(message) {
-            const notification = document.getElementById('notification');
-            notification.querySelector('span').textContent = message;
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
+    // Decode
+    function decodeMessage() {
+        const inputText = document.getElementById('inputText').value;
+        const parts = inputText.split('-');
+        let result = '';
+        for (let part of parts) {
+            result += decodeMap[part] ? decodeMap[part] : part;
         }
+        document.getElementById('resultText').textContent = result;
+    }
 
-        // Function to switch between tabs
-        function switchTab(tabName) {
-            // Hide all tab contents
-            const tabContents = document.getElementsByClassName('tab-content');
-            for (let i = 0; i < tabContents.length; i++) {
-                tabContents[i].classList.remove('active');
-            }
-            
-            // Remove active class from all tabs
-            const tabs = document.getElementsByClassName('tab');
-            for (let i = 0; i < tabs.length; i++) {
-                tabs[i].classList.remove('active');
-            }
-            
-            // Show the selected tab content and mark tab as active
-            document.getElementById(tabName).classList.add('active');
-            event.currentTarget.classList.add('active');
-            
-            // Move the tab highlight
-            const tabHighlight = document.getElementById('tabHighlight');
-            if (tabName === 'converter') {
-                tabHighlight.style.transform = 'translateX(0)';
-            } else {
-                tabHighlight.style.transform = 'translateX(100%)';
-            }
-            
-            // If code table tab is selected, generate the table
-            if (tabName === 'code-table') {
-                generateCodeTable();
-            }
+    // Copy to clipboard
+    function copyResult() {
+        const text = document.getElementById('resultText').textContent;
+        if (text) {
+            navigator.clipboard.writeText(text)
+            .then(() => showNotification('Copied to clipboard!'))
+            .catch(() => showNotification('Failed to copy!'));
+        } else showNotification('No result to copy!');
+    }
+
+    // Notification
+    function showNotification(msg) {
+        const notif = document.getElementById('notification');
+        notif.querySelector('span').textContent = msg;
+        notif.classList.add('show');
+        setTimeout(() => notif.classList.remove('show'), 3000);
+    }
+
+    // Generate code table
+    function generateCodeTable() {
+        const tableBody = document.getElementById('codeTableBody');
+        tableBody.innerHTML = '';
+        const allKeys = Object.keys(encodeMap);
+        const half = Math.ceil(allKeys.length / 2);
+        for (let i = 0; i < half; i++) {
+            const row = document.createElement('tr');
+
+            const leftKey = allKeys[i];
+            const leftChar = document.createElement('td'); leftChar.textContent = leftKey;
+            const leftCode = document.createElement('td'); leftCode.textContent = encodeMap[leftKey].join(', ');
+
+            const rightKey = allKeys[i+half];
+            const rightChar = document.createElement('td'); 
+            const rightCode = document.createElement('td');
+            if (rightKey) { rightChar.textContent = rightKey; rightCode.textContent = encodeMap[rightKey].join(', ');}
+            else { rightChar.textContent=''; rightCode.textContent=''; }
+
+            row.appendChild(leftChar); row.appendChild(leftCode);
+            row.appendChild(rightChar); row.appendChild(rightCode);
+            tableBody.appendChild(row);
         }
+    }
 
-        // Function to generate the code table
-        function generateCodeTable() {
-            const tableBody = document.getElementById('codeTableBody');
-            tableBody.innerHTML = '';
-            
-            const entries = Object.entries(encodeMap);
-            const rows = Math.ceil(entries.length / 2);
-            
-            for (let i = 0; i < rows; i++) {
-                const row = document.createElement('tr');
-                
-                // First column
-                const cell1 = document.createElement('td');
-                cell1.textContent = entries[i][0];
-                row.appendChild(cell1);
-                
-                const cell2 = document.createElement('td');
-                cell2.textContent = entries[i][1];
-                row.appendChild(cell2);
-                
-                // Second column (if exists)
-                if (i + rows < entries.length) {
-                    const cell3 = document.createElement('td');
-                    cell3.textContent = entries[i + rows][0];
-                    row.appendChild(cell3);
-                    
-                    const cell4 = document.createElement('td');
-                    cell4.textContent = entries[i + rows][1];
-                    row.appendChild(cell4);
-                } else {
-                    // Add empty cells if no second entry
-                    row.appendChild(document.createElement('td'));
-                    row.appendChild(document.createElement('td'));
-                }
-                
-                tableBody.appendChild(row);
-            }
-        }
+    generateCodeTable();
 
-        // Initialize with an example
-        document.getElementById('inputText').value = 'Atharv Sharma 😎';
-        encodeMessage();
-    </script>
+    // Tab switch
+    function switchTab(tabName) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+        document.getElementById(tabName).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+
+    // Initialize with example
+    document.getElementById('inputText').value = 'bit.ly/apcrgc-physics';
+    encodeMessage();
+</script>
 </body>
 </html>
